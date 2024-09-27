@@ -18,15 +18,12 @@ public class SteganographyUtils {
             }
     ).collect(Collectors.toMap(entry -> entry[0], entry -> entry[1]));
 
-    private static final Map<Character, Character> ENG_TO_RUS = Stream.of(
-            new Character[][]{
-                    {'A', 'А'}, {'C', 'С'}, {'E', 'Е'},
-                    {'K', 'К'}, {'M', 'М'}, {'O', 'О'},
-                    {'T', 'Т'}, {'X', 'Х'}, {'P', 'Р'},
-                    {'a', 'а'}, {'c', 'с'}, {'e', 'е'},
-                    {'o', 'о'}, {'x', 'х'}, {'p', 'р'}
-            }
-    ).collect(Collectors.toMap(entry -> entry[0], entry -> entry[1]));
+    private static final Map<Character, Character> ENG_TO_RUS;
+
+    static {
+        ENG_TO_RUS = RUS_TO_ENG.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+    }
 
     private SteganographyUtils() {
     }
